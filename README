@@ -1,3 +1,2 @@
-Just make it executable, run chmod +x rege-minyak.sh
+Just make it executable, run rege-minyak.php
 Make sure you have an internet connection, as it will scrap KPDNKK's website and parse the result!
-

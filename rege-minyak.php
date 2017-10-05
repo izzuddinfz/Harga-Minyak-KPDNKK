@@ -1,20 +1,23 @@
 <?php
+function checkinc($no1, $no2)
+{
+    $diff = abs($no1-$no2);
+    if($no1>$no2){
+        $echo = 'naik';
+        $color = '#FF0000';
+    } else {
+        $echo = 'turun';
+        $color = '#008000';
+    }
+    return '<span style="color:'.$color.'">('. $echo .' '.($diff).')</span>';
+}
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, 'http://www.kpdnkk.gov.my/kpdnkk/harga-minyak-2017/');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 $response = curl_exec($ch); 
-
-preg_match_all('/#cccccc;\">(.*)<\/div>/', $response, $matches);
+$data = preg_match_all('/#cccccc;\">(.*)<\/div>/', $response, $matches);
 echo '<h2>HARGA MINYAK PETROL RON95, RON97, DIESEL SEMASA DI MALAYSIA</h2>';
-echo '<p>'.strip_tags($matches[1][0]).': '.$matches[1][4].'<br/>';
-echo strip_tags($matches[1][1]).': RM'.$matches[1][5].'<br/>';
-echo strip_tags($matches[1][2]).': RM'.$matches[1][6].'<br/>';
-echo strip_tags($matches[1][3]).': RM'.$matches[1][7].'</p>';
-
-$beza1 = $matches[1][5]-$matches[1][9];
-$beza2 = $matches[1][6]-$matches[1][10];
-$beza3 = $matches[1][7]-$matches[1][11];
-echo '<h2>PERBANDINGAN DENGAN MINGGU LEPAS (tanda negatif bermaksud harga semasa lebih rendah)</h2>';
-echo '<p>Beza '.strip_tags($matches[1][1]).': RM'.$beza1.'<br/>';
-echo 'Beza '.strip_tags($matches[1][2]).': RM'.$beza2.'<br/>';
-echo 'Beza '.strip_tags($matches[1][3]).': RM'.$beza3.'</p>';
+echo '<p>'.strip_tags($matches[1][0]).': '.$matches[1][$data-4].'<br/>';
+echo strip_tags($matches[1][1]).': RM'.$matches[1][$data-3].' '.checkinc($matches[1][$data-3],$matches[1][$data-7]).'<br/>';
+echo strip_tags($matches[1][2]).': RM'.$matches[1][$data-2].' '.checkinc($matches[1][$data-2],$matches[1][$data-6]).'<br/>';
+echo strip_tags($matches[1][3]).': RM'.$matches[1][$data-1].' '.checkinc($matches[1][$data-1],$matches[1][$data-5]).'</p>';

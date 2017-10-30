@@ -3,10 +3,10 @@ function checkinc($no1, $no2)
 {
     $diff = abs($no1-$no2);
     if($no1>$no2){
-        $echo = 'naik';
+        $echo = '+';
         $color = '#FF0000';
     } else {
-        $echo = 'turun';
+        $echo = '-';
         $color = '#008000';
     }
     return '<span style="color:'.$color.'">('. $echo .' '.($diff).')</span>';
@@ -16,8 +16,41 @@ curl_setopt($ch, CURLOPT_URL, 'http://www.kpdnkk.gov.my/kpdnkk/harga-minyak-2017
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 $response = curl_exec($ch); 
 $data = preg_match_all('/#cccccc;\">(.*)<\/div>/', $response, $matches);
-echo '<h2>HARGA MINYAK PETROL RON95, RON97, DIESEL SEMASA DI MALAYSIA</h2>';
-echo '<p>'.strip_tags($matches[1][0]).': '.$matches[1][$data-4].'<br/>';
-echo strip_tags($matches[1][1]).': RM'.$matches[1][$data-3].' '.checkinc($matches[1][$data-3],$matches[1][$data-7]).'<br/>';
-echo strip_tags($matches[1][2]).': RM'.$matches[1][$data-2].' '.checkinc($matches[1][$data-2],$matches[1][$data-6]).'<br/>';
-echo strip_tags($matches[1][3]).': RM'.$matches[1][$data-1].' '.checkinc($matches[1][$data-1],$matches[1][$data-5]).'</p>';
+?>
+<body>
+    <table>
+        <tr>
+            <th colspan="2">Harga Petrol</th>
+        </tr>
+        <tr>
+            <td>RON 95</td>
+            <td>RM<? echo $matches[1][$data-2] . ' ' . checkinc($matches[1][$data-2],$matches[1][$data-6]) ?></td>
+        </tr>
+        <tr>
+            <td>RON 97</td>
+            <td>RM<? echo $matches[1][$data-3] . ' ' . checkinc($matches[1][$data-3],$matches[1][$data-7]) ?></td>
+        </tr>
+        <tr>
+            <td>RON 100</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>VPR</td>
+            <td></td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <th colspan="2">Harga Diesel</th>
+        </tr>
+        <tr>
+            <td>EURO 2M</td>
+            <td>RM<? echo $matches[1][$data-1] . ' ' . checkinc($matches[1][$data-1],$matches[1][$data-5]) ?></td>
+        </tr>
+        <tr>
+            <td>EURO 5</td>
+            <td>RM<? echo ((float)$matches[1][$data-1])+0.10 . ' ' . checkinc($matches[1][$data-1],$matches[1][$data-5]) ?></td>
+        </tr>
+    </table>
+    <p>Harga Minyak Bagi Tempoh <span style="text-transform: capitalize;"><? echo strtolower($matches[1][$data-4]) ?></span>.</p>
+</body>

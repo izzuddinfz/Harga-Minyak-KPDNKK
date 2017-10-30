@@ -24,11 +24,11 @@ $data = preg_match_all('/#cccccc;\">(.*)<\/div>/', $response, $matches);
         </tr>
         <tr>
             <td>RON 95</td>
-            <td>RM<? echo $matches[1][$data-2] . ' ' . checkinc($matches[1][$data-2],$matches[1][$data-6]) ?></td>
+            <td>RM<? echo number_format((float)$matches[1][$data-2], 2, '.', '') . ' ' . checkinc($matches[1][$data-2],$matches[1][$data-6]) ?></td>
         </tr>
         <tr>
             <td>RON 97</td>
-            <td>RM<? echo $matches[1][$data-3] . ' ' . checkinc($matches[1][$data-3],$matches[1][$data-7]) ?></td>
+            <td>RM<? echo number_format((float)$matches[1][$data-3], 2, '.', '') . ' ' . checkinc($matches[1][$data-3],$matches[1][$data-7]) ?></td>
         </tr>
         <tr>
             <td>RON 100</td>
@@ -36,7 +36,7 @@ $data = preg_match_all('/#cccccc;\">(.*)<\/div>/', $response, $matches);
         </tr>
         <tr>
             <td>VPR</td>
-            <td></td>
+            <td>RM<? echo number_format(((float)$matches[1][$data-3])+0.70, 2, '.', '') ?></td>
         </tr>
     </table>
     <table>
@@ -45,11 +45,11 @@ $data = preg_match_all('/#cccccc;\">(.*)<\/div>/', $response, $matches);
         </tr>
         <tr>
             <td>EURO 2M</td>
-            <td>RM<? echo $matches[1][$data-1] . ' ' . checkinc($matches[1][$data-1],$matches[1][$data-5]) ?></td>
+            <td>RM<? echo number_format((float)$matches[1][$data-1], 2, '.', '') . ' ' . checkinc($matches[1][$data-1],$matches[1][$data-5]) ?></td>
         </tr>
         <tr>
             <td>EURO 5</td>
-            <td>RM<? echo ((float)$matches[1][$data-1])+0.10 . ' ' . checkinc($matches[1][$data-1],$matches[1][$data-5]) ?></td>
+            <td>RM<? echo number_format(((float)$matches[1][$data-1])+0.10, 2, '.', '') . ' ' . checkinc($matches[1][$data-1],$matches[1][$data-5]) ?></td>
         </tr>
     </table>
     <p>Harga Minyak Bagi Tempoh <span style="text-transform: capitalize;"><? echo strtolower($matches[1][$data-4]) ?></span>.</p>

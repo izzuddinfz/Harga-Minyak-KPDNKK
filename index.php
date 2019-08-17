@@ -12,7 +12,7 @@ function checkinc($no1, $no2)
     return '<span style="color:'.$color.'">('. $echo .' '.($diff).')</span>';
 }
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, 'http://www.kpdnkk.gov.my/kpdnkk/harga-minyak-2017/');
+curl_setopt($ch, CURLOPT_URL, 'https://www.kpdnhep.gov.my/harga-minyak-2018-2/');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 $response = curl_exec($ch); 
 $data = preg_match_all('/#cccccc;\">(.*)<\/div>/', $response, $matches);
